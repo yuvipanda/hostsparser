@@ -28,6 +28,11 @@ def parse_line(line):
             tuple(match.groups()[1].split()) if match.groups()[1] else None,
             match.groups()[2])
 
+def parse_file(f):
+    '''Accepts a file-like object with data in hosts format, and yields (ip, (hosts,), comment) tuples'''
+    for line in f:
+        yield parse_line(line)
+
 def format_line(ip, hosts, comment):
     formatted_line = ""
     if ip:
